@@ -8,21 +8,22 @@
 	<title>Highscores</title>
 
 	<link rel="stylesheet" href="/assets/css/style.css">
+	<script defer src="/assets/js/highscores.js"></script>
 </head>
 
 <body>
 	<section class="highscores">
 		<h2>Highscores</h2>
 		<div>
-			<ol class="scores">
-				<li>Joe - 23</li>
-				<li>Alex - 22</li>
-				<li>Mary - 7</li>
-				<li>Biden - 3</li>
+			<ol id="highscore-ol" class="scores">
 			</ol>
 
+			<p id="no-highscores-warning">
+				There are no highscores yet.<br>Go and be the first!
+			</p>
+
 			<a class="button" href="/">Go back</a>
-			<a class="button" tabindex="0">Clear all scores</a>
+			<a id="clear-all-scores" class="button" tabindex="0">Clear all scores</a>
 		</div>
 	</section>
 </body>
