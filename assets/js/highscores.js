@@ -19,7 +19,13 @@ document.querySelector("#clear-all-scores").addEventListener("click", (e) => {
 const scores = getScores();
 if (scores !== null) {
 	document.querySelector("#no-highscores-warning").style.display = "none";
-	scores.sort((a, b) => a.score < b.score);
+	
+	scores.sort((a, b) => {
+		if(a.score > b.score) return -1;
+		if(a.score < b.score) return 1;
+		return 0;
+	});
+	
 	scores.forEach(player => {
 		makeLI(player)
 	});
