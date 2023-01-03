@@ -4,6 +4,7 @@ const TIME_SPAN = document.querySelector("#time-remaining");
 const GAME_STATUS = document.querySelector("#status");
 const GAME_QUESTION = document.querySelector("#question");
 const GAME_ANSWERS = document.querySelectorAll("#answers li");
+const GAME_SCORE = document.querySelector("#final-score");
 const HIGHSCORE_NAME_ENTRY = document.querySelector("#highscore-name-entry");
 const HIGHSCORE_NAME_WARNING = document.querySelector("#highscore-name-warning");
 const HIGHSCORE_NAME_SUBMIT = document.querySelector("#highscore-name-submit");
@@ -81,6 +82,7 @@ const displayQuestion = (question) => {
 const showGameOverScreen = () => {
 	GAME_RUNNING_SCREEN.style.display = "none";
 	GAME_END_SCREEN.style.display = "block";
+	showFinalScore(score);
 };
 
 const updateTime = time => {
@@ -99,8 +101,8 @@ const setAnswer = (answer, index) => {
 	GAME_ANSWERS[index].innerHTML = answer;
 };
 
-const showFinalScore = score = {
-	
+const showFinalScore = score => {
+	GAME_SCORE.innerHTML = score;
 };
 
 const getCurrentQuestion = () => {
