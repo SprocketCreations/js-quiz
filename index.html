@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Javascript quiz</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<script defer src="/assets/js/game.js"></script>
+</head>
+<body>
+	<header class="banner">
+		<a class="highscores-link" href="./highscores">View high scores</a>
+		<p class="time-remaining">
+			Time: <span id="time-remaining">14</span>
+		</p>
+	</header>	
+	<main id="game-running" class="content">
+		<p id="question" class="question">
+			What language is most commonly used for creating websites?
+		</p>
+		<ol id="answers" class="answers">
+			<li class="button" tabindex="0">C++</li>
+			<li class="button" tabindex="0">Fortran</li>
+			<li class="button" tabindex="0">Javascript</li>
+			<li class="button" tabindex="0">Scratch</li>
+		</ol>
+		<span class="horizontal-line"></span>
+		<p id="status" class="status">Correct!</p>
+	</main>
+	<main id="game-over" class="content">
+		<h2>Game over!</h2>
+		<p>Your final score is <span id="final-score">22</span>.</p>
+		<div class="vertical-alignment">
+			<input id="highscore-name-entry" class="highscore-name-entry" type="text" placeholder="Enter your name">
+			<a tabindex="0" class="button">Submit</a>
+		</div>
+	</main>
+</body>
+</html>
