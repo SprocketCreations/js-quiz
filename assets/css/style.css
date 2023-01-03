@@ -112,3 +112,26 @@ body {
 #game-over {
 	display: none;
 }
+
+.warning {
+	color: red;
+	text-decoration: underline;
+	font-weight: bold;
+	font-style: italic;
+	margin-bottom: 0;
+	margin-left: .5em;
+	visibility: hidden;
+}
+
+.animated-warning {
+	visibility: visible;
+	animation-name: pulse-white;
+	animation-iteration-count: 3;
+	animation-duration: 200ms;
+}
+
+@keyframes pulse-white {
+	0% {}
+	50% {color: rgb(247, 189, 189);}
+	100%{}
+}
