@@ -39,9 +39,9 @@ body {
 
 .answers {
 	list-style-position: inside;
-	width: 33%;
+	width: 50%;
 	margin: 0;
-	padding:0;
+	padding: 0;
 }
 
 .button {
@@ -89,7 +89,10 @@ body {
 
 }
 
-.scores li /*even*/ {
+.scores li
+
+/*even*/
+	{
 	background-color: rgb(186, 186, 219);
 	padding: .3em .5em;
 	/* color: white; */
@@ -130,8 +133,92 @@ body {
 	animation-duration: 200ms;
 }
 
+.homepage {
+	text-align: center;
+	margin: 5em 3em;
+}
+
+.nav-buttons {
+	margin: 1em auto;
+	display: flex;
+	flex-flow: column;
+	width: 7em;
+	text-align: center;
+}
+
+.nav-buttons>* {
+	flex: 1 1 100%;
+}
+
 @keyframes pulse-white {
 	0% {}
-	50% {color: rgb(247, 189, 189);}
-	100%{}
+
+	50% {
+		color: rgb(247, 189, 189);
+	}
+
+	100% {}
+}
+
+@media screen and (max-width: 400px) {
+	.content {
+		width: 240px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.answers {
+		width: 100%
+	}
+	.highscores {
+		width: 144px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.vertical-alignment {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.vertical-alignment > * {
+		flex: 1 1 100%;
+	}
+}
+
+@media screen and (max-width: 270px) {
+	.content {
+		width: calc(100% - 30px);
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.banner {
+		flex-direction: column;
+		gap: .8em;
+	}
+	.homepage {
+		width: 170px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+@media screen and (max-width: 224px) {
+	.vertical-alignment {
+		align-items: stretch;
+	}
+	#highscore-name-submit {
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 188px) {
+	.homepage {
+		width: calc(100% - 15px);
+	}
+}
+@media screen and (max-width: 164px) {
+	.highscores {
+		width: calc(100% - 15px);
+		margin-right: auto;
+		margin-left: auto;
+		text-align: center;
+	}
 }
