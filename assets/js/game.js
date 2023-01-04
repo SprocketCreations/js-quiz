@@ -146,7 +146,7 @@ function Question() {
 }
 
 /* GAME GLOBALS */
-let timeRemaining = 75;
+let timeRemaining = 150;
 let currentQuestion = 0;
 let score = 0;
 
