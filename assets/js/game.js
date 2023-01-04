@@ -159,7 +159,7 @@ const tick = () => {
 		updateTime(timeRemaining);
 	}
 
-	if (timeRemaining === 0) {
+	if (timeRemaining <= 0) {
 		endGame();
 		haltTimer();
 	}
@@ -202,7 +202,8 @@ const clearAnswerFocus = () => {
 const showGameOverScreen = () => {
 	GAME_RUNNING_SCREEN.style.display = "none";
 	GAME_END_SCREEN.style.display = "block";
-	score = timeRemaining;
+	score = Math.max(0, timeRemaining);
+	updateTime(score);
 	showFinalScore(score);
 };
 
@@ -272,7 +273,13 @@ const userSelectedWrongAnswer = () => {
 
 	flashScorePenalty(`-${TIME_PENALTY}`);
 
-	nextQuestion();
+	if (timeRemaining <= 0) {
+		endGame();
+		haltTimer();
+	}
+	else {
+		nextQuestion();
+	}
 };
 
 const setAnswerEventListener = (answerLi, index) => {
