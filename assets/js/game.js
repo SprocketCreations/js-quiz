@@ -106,7 +106,7 @@ const QUESTIONS = [
 		2,
 		"let one = +1",
 		"var lessTaco = \"taco\" - 1",
-		"\"a\".toUpperCase()",
+		"1.toString()",
 		"const err = 12.4 / 0"
 	),
 	new Question(
