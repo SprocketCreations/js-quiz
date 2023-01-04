@@ -24,6 +24,7 @@ body {
 
 .time-remaining {
 	margin: 0;
+	position: relative;
 }
 
 .content {
@@ -131,6 +132,28 @@ body {
 	animation-name: pulse-white;
 	animation-iteration-count: 3;
 	animation-duration: 200ms;
+}
+
+.lost-score {
+	position: absolute;
+	visibility: visible;
+	opacity: 0;
+	left: 0;
+	right: 0;
+	text-align: right;
+	text-decoration: none;
+	animation: 750ms float-away;
+}
+
+@keyframes float-away {
+	from {
+		margin-top: 1em;
+		opacity: 1;
+	}
+	to {
+		margin-top: 2em;
+		opacity: 0;
+	}
 }
 
 .homepage {

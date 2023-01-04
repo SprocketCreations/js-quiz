@@ -8,22 +8,123 @@ const GAME_SCORE = document.querySelector("#final-score");
 const HIGHSCORE_NAME_ENTRY = document.querySelector("#highscore-name-entry");
 const HIGHSCORE_NAME_WARNING = document.querySelector("#highscore-name-warning");
 const HIGHSCORE_NAME_SUBMIT = document.querySelector("#highscore-name-submit");
+const GAME_SCORE_PENALTY = document.querySelector("#score-penalty");
+
+const TIME_PENALTY = 10;
 
 const QUESTIONS = [
 	new Question(
-		"What sound does a cow make?",
-		2,
-		"Bark",
-		"Chirp",
-		"Moo",
-		"Bleat"),
+		"What symbol do you use to mark the end of a line?",
+		1,
+		":",
+		";",
+		".",
+		"end"
+	),
 	new Question(
-		"What sound does a dog make?",
+		"How do you create a new element?",
 		0,
-		"Bark",
-		"Chirp",
-		"Moo",
-		"Bleat"),
+		"createElement()",
+		"makeElement()",
+		"craftElement()",
+		"newElement()"
+	),
+	new Question(
+		"What syntax for creating a variable is wrong?",
+		3,
+		"const price = 12.95;",
+		"let cheese = \"mouse\"",
+		"var globe = \"Earth\"",
+		"int iterator = 7"
+	),
+	new Question(
+		"What does the this keyword represent in the global scope?",
+		0,
+		"window",
+		"document",
+		"undefined",
+		"null"
+	),
+	new Question(
+		"What is a useful tool for debugging?",
+		3,
+		"Internet Explorer",
+		"react.js",
+		"throw new Error()",
+		"console.log()"
+	),
+	new Question(
+		"Commonly used data-types do not include:",
+		1,
+		"numbers",
+		"alert",
+		"booleans",
+		"objects"
+	),
+	new Question(
+		"Strings are enclosed with what symbol?",
+		3,
+		"`",
+		"'",
+		"\"",
+		"All of the above"
+	),
+	new Question(
+		"Arrays are actually:",
+		0,
+		"objects",
+		"functions",
+		"strings",
+		"none of the above"
+	),
+	new Question(
+		"Arrays can store:",
+		3,
+		"arrays",
+		"strings",
+		"objects",
+		"all of the above"
+	),
+	new Question(
+		"How can you print text to the console?",
+		1,
+		"print(\"hello\")",
+		"console.log(\"hello\")",
+		"out << \"hello\"",
+		"all of the above"
+	),
+	new Question(
+		"How can you remove an element from an array via its index?",
+		1,
+		"array.remove(index)",
+		"array.splice(index, 1)",
+		"array.eject()",
+		"array.splice(index)"
+	),
+	new Question(
+		"Which line of code will throw an error?",
+		2,
+		"let one = +1",
+		"var lessTaco = \"taco\" - 1",
+		"\"a\".toUpperCase()",
+		"const err = 12.4 / 0"
+	),
+	new Question(
+		"How can you safely check if two values are the same?",
+		2,
+		"a == b",
+		"a ==== b",
+		"a === b",
+		"a = b"
+	),
+	new Question(
+		"Which of these is not a valid function declaration or expression?",
+		3,
+		"var shoot = function() {};",
+		"const reload = () => {};",
+		"function back() {}",
+		"none of the above"
+	),
 ];
 
 // Constructor for a question
@@ -67,21 +168,41 @@ const tick = () => {
 
 /* GAME UTILITY FUNCTIONS */
 const initializeGame = () => {
+	randomizeQuestions();
 	updateTime(timeRemaining);
 	displayQuestion(getCurrentQuestion());
 	displayStatus("");
 }
 
+const randomizeQuestions = () => {
+	//From https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+	function shuffleArray(array) {
+		for (let i = array.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[array[i], array[j]] = [array[j], array[i]];
+		}
+	}
+	shuffleArray(QUESTIONS);
+};
+
 const displayQuestion = (question) => {
+	clearAnswerFocus();
 	setQuestion(question.displayQuestion);
 	for (let i = 0; i < 4; ++i) {
 		setAnswer(question.answers[i], i);
 	}
 };
 
+const clearAnswerFocus = () => {
+	GAME_ANSWERS.forEach(ANSWER_LI => {
+		ANSWER_LI.blur();
+	});
+};
+
 const showGameOverScreen = () => {
 	GAME_RUNNING_SCREEN.style.display = "none";
 	GAME_END_SCREEN.style.display = "block";
+	score = timeRemaining;
 	showFinalScore(score);
 };
 
@@ -118,6 +239,15 @@ const nextQuestion = () => {
 	}
 };
 
+const flashScorePenalty = lostScore => {
+	GAME_SCORE_PENALTY.classList.remove("lost-score");
+
+	if (lostScore) GAME_SCORE_PENALTY.innerHTML = lostScore;
+
+	void GAME_SCORE_PENALTY.offsetWidth;
+	GAME_SCORE_PENALTY.classList.add("lost-score");
+};
+
 const endGame = () => {
 	showGameOverScreen();
 	haltTimer();
@@ -136,6 +266,11 @@ const userSelectedCorrectAnswer = () => {
 
 const userSelectedWrongAnswer = () => {
 	displayStatus("Incorrect!");
+
+	timeRemaining -= TIME_PENALTY;
+	updateTime(timeRemaining);
+
+	flashScorePenalty(`-${TIME_PENALTY}`);
 
 	nextQuestion();
 };
@@ -188,8 +323,7 @@ HIGHSCORE_NAME_SUBMIT.addEventListener("click", event => {
 
 	if (name === "")
 		showError();
-	else
-	{
+	else {
 		submitName(name, score);
 		window.location.href = "/highscores";
 	}
