@@ -146,7 +146,7 @@ function Question() {
 }
 
 /* GAME GLOBALS */
-let timeRemaining = 150;
+let timeRemaining = 90;
 let currentQuestion = 0;
 let score = 0;
 
@@ -325,7 +325,7 @@ HIGHSCORE_NAME_SUBMIT.addEventListener("click", event => {
 		showError();
 	else {
 		submitName(name, score);
-		window.location.href = "/highscores";
+		window.location.href = "../highscores";
 	}
 });
 

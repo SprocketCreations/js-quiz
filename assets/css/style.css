@@ -145,6 +145,10 @@ body {
 	animation: 750ms float-away;
 }
 
+#score-penalty {
+	position:absolute;
+}
+
 @keyframes float-away {
 	from {
 		margin-top: 1em;
